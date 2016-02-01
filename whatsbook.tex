@@ -1,0 +1,197 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+% =================================
+%
+% whatsbook.tex
+% Created by Pelle Beckman, 2016
+%
+% See medium.com/@pbeck and the post about
+% 'Books from WhatsApp' for more info. 
+% 
+% =================================
+
+% Document setup
+% ==============
+\documentclass[9pt, showtrims, openany]{memoir} % Add/remove 'showtrims' to show trims
+%\usepackage{showframe} % Great for "debugging" layouts
+
+% Title & Author
+% ===============
+\title{WhatsBook}
+\author{Margot, Chas & Dudley Tenenbaum}
+
+
+% Language
+% ========
+\usepackage{blindtext}
+\usepackage[english]{babel}
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage[hyphens]{url}
+\usepackage{microtype} % Improves character and word spacing
+
+
+% Stock & page size
+% ===================
+\setstocksize{8.25in}{5.125in}
+\settrimmedsize{8in}{5in}{*}
+\settrims{0.125in}{0.125in}
+\setlrmarginsandblock{20mm}{16mm}{*}
+\setulmarginsandblock{16mm}{32mm}{*}
+\checkandfixthelayout
+\fixpdflayout
+
+
+% Type
+% =========
+\setmainfont[Ligatures=TeX]{Ideal Sans Book}
+\setmonofont{Ideal Sans Book}
+\usepackage{titlesec}
+
+% Remove hypenation, see
+% \usepackage[none]{hyphenat}
+
+
+% Colors
+% =====
+\usepackage{color}
+
+\definecolor{color1}{RGB}{33, 33, 33}
+\definecolor{color2}{RGB}{90, 181,191}
+\definecolor{color3}{RGB}{135, 191, 120}
+\definecolor{lightgray}{gray}{0.1}
+\definecolor{january}{RGB}{0, 168, 150}
+
+
+% Chapters
+% =========
+\usepackage{pagecolor}
+\usepackage[pages=some]{background}
+\usepackage{soul}
+\setul{6pt}{6pt}
+
+\backgroundsetup{
+	scale=1,
+	angle=0,
+	opacity=1,
+	contents={\includegraphics[width=\stockwidth,height=\stockheight]{a45b24635eb16823062050dd2f807369}}
+}
+
+\makechapterstyle{WABChapter}{%
+	\renewcommand*{\chapterheadstart}{\vspace*{140pt}}
+	\renewcommand{\chaptitlefont}{\huge \centering \fontspec[Letters=Uppercase, Scale=5]{Tungsten Medium}}
+	\renewcommand{\printchaptertitle}[1]{%
+		\chaptitlefont \MakeUppercase{\color{white}{\ul{##1}}}
+		\vfill
+	}
+	\renewcommand{\printchaptername}{ }
+	\renewcommand{\chapternamenum}{ }
+	\renewcommand{\printchapternum}{ }
+}
+
+\chapterstyle{WABChapter}
+
+% Sections
+% =================
+\usepackage{titlesec}
+%\usepackage{setspace}
+\newcommand{\dotrule}[1]{%
+	\parbox[c]{#1}{\hspace{-1.7pt}\dotfill}}
+
+\titleformat{\section}[block]
+{\raggedright\normalfont\bfseries\fontspec[Numbers={Lining}, Scale=0.86]{Ideal Sans Book}}
+{\thesection.}{0}{}[\dotrule{\textwidth}]
+
+\titlespacing{\section}{0pt}{12pt}{0pt}
+
+
+% Footers & Headings
+% =================
+\usepackage{nameref}
+\makeatletter
+\newcommand*{\currentname}{\@currentlabelname}
+\makeatother
+
+\makeevenfoot{headings}{\scriptsize\fontspec[Numbers={Lining}]{Ideal Sans Book}\thepage}{}{}
+\makeoddfoot{headings}{}{}{\scriptsize\fontspec[Numbers={Lining}]{Ideal Sans Book}\thepage}
+\makeevenhead{headings}{}{}{}
+\makeoddhead{headings}{}{}{}
+
+\copypagestyle{chapter}{plain} % make chapter a page style of its own
+\makeevenfoot{chapter}{}{}{}
+\makeoddfoot{chapter}{}{}{}
+\makeevenhead{chapter}{}{}{}
+\makeoddhead{chapter}{}{}{}
+
+
+% User styling
+% ==============
+\newcommand{\dudley}[0]{\textbf{\textsc{dudley: }}}
+\newcommand{\margot}[0]{\textbf{\textsc{margot: }}}
+\newcommand{\chas}[0]{\textbf{\textsc{chas: }}}
+
+% Images
+% ========
+\graphicspath{ {./images/} }
+\usepackage{float}
+\usepackage[export]{adjustbox} % For frames
+
+% Emojis
+% =========
+\usepackage{ifxetex}
+\usepackage{ifluatex}
+\ifxetex
+\usepackage[ios,font=seguiemj.ttf]{emoji}
+\usepackage{fontspec}
+\newcommand{\dogline}{The \emoji{23E9} brown \emoji{1F43A} jumps over the lazy \emoji{1F436}.}
+\else
+\ifluatex
+\usepackage[ios,font=Symbola_hint.ttf]{emoji}
+\usepackage{fontspec}
+\newcommand{\dogline}{The \emoji{23E9} brown \emoji{1F43A} jumps over the lazy \emoji{1F436}.}
+\else
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ios]{emoji}
+\newcommand{\dogline}{The ⏩ brown 🐺 jumps over the lazy 🐶.}
+\fi
+\fi
+
+
+% PDF/X-3 stuff, necessary for Blurb IF USING xelatex
+% ===================================================
+\special{pdf:docinfo <<
+	/Title (Book Title)   		% set your title here
+	/Author (Author)       		% set author name
+	/Subject (Subject)          % set subject
+	/Keywords (List, Of, Words) % set keywords
+	/Trapped (False)
+	/GTS_PDFXVersion (PDF/X-3:2002)
+	% must have a trim box, but I think Blurb ignores the values
+	% /TrimBox [0.00000 9.00000 684.36000 585.00000] >>
+}
+\special{pdf:put @catalog <<
+	/OutputIntents [ <<
+	/Info (none)
+	/Type /OutputIntent
+	/S /GTS_PDFX
+	/OutputConditionIdentifier (Blurb.com)
+	/RegistryName (http://www.color.org/)
+	>> ] >>
+}
+
+
+% Page breaks
+% ============
+\raggedbottom
+
+% Document
+% ========
+\usepackage{newclude}
+\begin{document}
+\begin{flushleft}
+\OnehalfSpacing
+\include{whatsbook-folio}
+\end{flushleft}
+\end{document}
