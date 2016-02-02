@@ -1,5 +1,5 @@
 
-![WhatsBook](http://i.imgur.com/kOwIOJC.png)
+![WhatsBook](http://i.imgur.com/3KJP6BF.jpg)
 
 # WhatsBook
 Create a book from WhatsApp chatlogs - with support for images, links, and emojis! 🎉
