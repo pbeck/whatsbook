@@ -4,5 +4,5 @@
 # WhatsBook
 Create a book from WhatsApp chatlogs - with support for images, links, and emojis! 🎉
 
-Read more at [medium.com/@pbeck](http://www.medium.com/@pbeck)
+Read more at ["A Hacker's Guide To Creating Books From WhatsApp"](https://medium.com/@pbeck/edbb397e0bee)
 
