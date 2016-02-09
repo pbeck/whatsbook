@@ -14,6 +14,9 @@ Requires python2.7 and pandas ('pip install pandas').
 2016-01-30
 Code is pretty crude, but gets (most of) the job done.
 Currently does not support skin modifiers
+
+2016-02-09
+Added if clause to final print output for Win support
 '''
 
 import io
@@ -159,7 +162,10 @@ if __name__ == '__main__':
             # TODO: Some lines do not start with dates
             date = line.split(" ")[0]
             if prevdate != date:
-                print(u"\section*{%s}" % date)
+                if sys.platform == 'win32':
+                    print(u"\section*{%s}" % date.encode('unicode-escape'))
+                else:
+                    print(u"\section*{%s}" % date)
 
             output_line = u" ".join(line.split(" ")[1:])
             #output_line = " ".join(str(item) for item in line.split(" "))
