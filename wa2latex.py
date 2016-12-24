@@ -120,7 +120,7 @@ if __name__ == '__main__':
                 line = re.sub("([a-zA-Z0-9-_]+).jpg", r'\n\\begin{figure}[H]\n' +
                     r'\\includegraphics[cfbox=lightgray 0.5pt 0pt, width=\\textwidth,keepaspectratio]{' + media_att.group(0) + r'}\n' +
                     r'\\end{figure}\n', line)
-                continue
+               
 
             # Remove timestamps
             line = re.sub("\d{2}:\d{2}:\d{2}:\s", "", line)
