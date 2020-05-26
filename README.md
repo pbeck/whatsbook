@@ -6,15 +6,20 @@ Create a book from WhatsApp chatlogs - with support for images, links, and emoji
 
 ## Quick Start
 
+1. Export your chat from within WhatsApp with media included (Chat Info > Export Chat)
+1. Install [pandas](https://pandas.pydata.org/)
 1. Install [TeXstudio](http://www.texstudio.org) 
 1. Install [latex-emoji](https://github.com/henningpohl/latex-emoji)
-1. Export your chat from within WhatsApp (Chat Info > Export Chat)
-1. Run `python wa2latex.py your-chatlog.txt > whatsbook-folio.tex` from a terminal
+1. Run `python3 wa2latex.py your-chatlog.txt > whatsbook-folio.tex` from a terminal
 1. Open `whatsbook.tex` in TeXstudio and run 'Build and View'
 
 Read more at ["A Hacker's Guide To Creating Books From WhatsApp"](http://beckman.io/whatsapp-books-a-hackers-guide)
 
 Tested on MacOS X 10.10 and Windows 10
+
+## Contributing
+
+I'd love your help and feedback! Please file an issue and/or submit a pull request.
 
 ## License
 

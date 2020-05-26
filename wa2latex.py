@@ -1,22 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 '''
 wa2latex.py
-Pelle Beckman, 2016
+
+(c) Pelle Beckman, 2016
+Licensed under the MIT License.
 
 Reformats data from WhatsApp chat logs for LaTeX.
-See medium.com/@pbeck and the article about 'Books from WhatsApp'
-for more info. Uses code from socialmediaparse
+See https://github.com/pbeck/whatsbook for more info.
+
+Uses code from socialmediaparse
 (github.com/seandolinar/socialmediaparse).
 
-Requires python2.7 and pandas ('pip install pandas').
-
-2016-01-30
-Code is pretty crude, but gets (most of) the job done.
-Currently does not support skin modifiers
-
-2016-02-09
-Added if clause to final print output for Win support
+Requires python3 and pandas
 '''
 
 import io
@@ -81,19 +78,25 @@ class EmojiHandler(object):
         for emoji in self.emoji_list:
 
             if emoji in text:
-                text = text.replace(emoji, "\\emoji{" + emoji.encode('unicode-escape').encode('utf-8') + "}")
+                text = text.replace(emoji, "\\emoji{" + str(emoji) + "}")
                 text = text.replace("\"", "")
                 text = text.replace(u"\\U000", "")
                 text = text.replace(u"\\u000", "")
 
         for emoji in self.human_emoji:
             if emoji in text:
-                text = text.replace(emoji, "\\emoji{" + emoji.encode('unicode-escape') + "}")
+                text = text.replace(emoji, "\\emoji{" + str(emoji) + "}")
                 #text = text.replace(u"\\U000", "")
         return text
 
 
 if __name__ == '__main__':
+
+    # No input given, print usage and exit
+    if len(sys.argv) == 1:        
+        print("No file argument given. Exiting.")
+        exit(1)
+
 
     emojis = EmojiHandler()
 
@@ -120,7 +123,6 @@ if __name__ == '__main__':
                 line = re.sub("([a-zA-Z0-9-_]+).jpg", r'\n\\begin{figure}[H]\n' +
                     r'\\includegraphics[cfbox=lightgray 0.5pt 0pt, width=\\textwidth,keepaspectratio]{' + media_att.group(0) + r'}\n' +
                     r'\\end{figure}\n', line)
-                continue
 
             # Remove timestamps
             line = re.sub("\d{2}:\d{2}:\d{2}:\s", "", line)
