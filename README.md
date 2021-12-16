@@ -1,3 +1,4 @@
+**Update 2021:** developers needed to fix bugs, please see [Issues](https://github.com/pbeck/whatsbook/issues)
 
 ![WhatsBook](http://i.imgur.com/3KJP6BF.jpg)
 
